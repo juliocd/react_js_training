@@ -4,7 +4,7 @@ import React from 'react';
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
-const NexExpense = (props) => {
+const NewExpense = (props) => {
     const saveExpenseDataHandler = (enteredExpenseData) => {
         const expenseData = {
             ...enteredExpenseData,
@@ -13,9 +13,13 @@ const NexExpense = (props) => {
         props.onAddExpense(expenseData);
     }
 
+    const cancelBtnNewExpensesEventHandler = () => {
+        return props.cancelBtn()
+    }
+
     return <div className="new-expense">
-        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} cancelBtnExpForm={cancelBtnNewExpensesEventHandler}/>
     </div>
 }
 
-export default NexExpense;
+export default NewExpense;

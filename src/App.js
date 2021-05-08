@@ -31,16 +31,34 @@ const DUMMY_EXPENSES = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [toggleNewExpense, setToggleNewExpense] = useState(false);
 
   const addExpenseHandler = expense => {
     setExpenses(prevExpenses => {
       return [expense, ...prevExpenses];
     });
+    setToggleNewExpense(prevVal => {
+      return !prevVal;
+    })
   };
+
+  const toggleNewExpenseEventHandler = () => {
+    setToggleNewExpense(prevVal => {
+      return !prevVal;
+    })
+  }
+
+  const cancelBtnEventHandler = () =>{
+    setToggleNewExpense(prevVal => {
+      return !prevVal;
+    })
+  } 
 
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler} />
+      {toggleNewExpense 
+        ? <NewExpense onAddExpense={addExpenseHandler}  cancelBtn={cancelBtnEventHandler}/> 
+        : <button onClick={toggleNewExpenseEventHandler}>Add New Expense</button>}
       <Expenses expenses ={expenses} />
     </div>
   );
